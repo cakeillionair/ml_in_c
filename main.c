@@ -163,6 +163,7 @@ float xorOut[] = {0, 1, 1, 0};
 float orOut[] = {0, 1, 1, 1};
 float nandOut[] = {1, 0, 0, 0};
 
+#define forward forward_2i_2_1_o
 #define gateSize 3
 #define gateWSize 2
 #define eps 1e-1
@@ -216,19 +217,19 @@ int main(int argc, char **argv) {
     randModel(TmpModel, gateSize, gateWSize);
 
     printModel("Logic Gate", TestModel, gateSize);
-    testModel(TestModel, gateSize, data, forward_2i_2_1_o);
+    testModel(TestModel, gateSize, data, forward);
     
     for (size_t i = 0; i < iter; i++) {
-        finiteDiff(TestModel, TmpModel, gateSize, eps, data, forward_2i_2_1_o);
+        finiteDiff(TestModel, TmpModel, gateSize, eps, data, forward);
 
-        if (debug) printf("Cost: %f\n", cost(TestModel, data, forward_2i_2_1_o));
+        if (debug) printf("Cost: %f\n", cost(TestModel, data, forward));
 
         train(TestModel, TmpModel, gateSize, rate);
     }
-    if (debug) printf("Cost: %f\n", cost(TestModel, data, forward_2i_2_1_o));
+    if (debug) printf("Cost: %f\n", cost(TestModel, data, forward));
 
     printModel("Trained Logic Gate", TestModel, gateSize);
-    testModel(TestModel, gateSize, data, forward_2i_2_1_o);
+    testModel(TestModel, gateSize, data, forward);
 
     freeModel(TestModel, gateSize);
     freeModel(TmpModel, gateSize);
