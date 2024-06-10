@@ -222,11 +222,11 @@ int main(int argc, char **argv) {
     for (size_t i = 0; i < iter; i++) {
         finiteDiff(TestModel, TmpModel, gateSize, eps, data, forward);
 
-        if (debug) printf("Cost: %f\n", cost(TestModel, data, forward));
+        if (debug) printf("Cost: %f at iteration %zu\n", cost(TestModel, data, forward), i);
 
         train(TestModel, TmpModel, gateSize, rate);
     }
-    if (debug) printf("Cost: %f\n", cost(TestModel, data, forward));
+    if (debug) printf("Final cost: %f\n", cost(TestModel, data, forward));
 
     printModel("Trained Logic Gate", TestModel, gateSize);
     testModel(TestModel, gateSize, data, forward);
