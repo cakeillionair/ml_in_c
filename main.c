@@ -38,6 +38,10 @@ float forward_2i_2_1_o(Model M, float *in) {
     return getValue(M[2], newIn, 2);
 }
 
+float forward_2i_1_o(Model M, float *in) {
+    return getValue(M[0], in, 2);
+}
+
 float cost(Model M, Data d, float (*forward)(Model, float *)) {
     float result = 0;
 
@@ -163,6 +167,8 @@ float xorOut[] = {0, 1, 1, 0};
 float orOut[] = {0, 1, 1, 1};
 float nandOut[] = {1, 0, 0, 0};
 
+float floatOut[] = {0, 0.5, 0.5, 1};
+
 #define forward forward_2i_2_1_o
 #define gateSize 3
 #define gateWSize 2
@@ -204,6 +210,7 @@ int main(int argc, char **argv) {
         case '^': data.out = xorOut; break;
         case '|': data.out = orOut; break;
         case '>': data.out = nandOut; break;
+        case '+': data.out = floatOut; break;
         default :
             printf("Option %s invalid\n", argv[1]);
             return 2;
