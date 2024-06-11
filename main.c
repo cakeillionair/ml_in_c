@@ -233,7 +233,7 @@ int main(int argc, char **argv) {
 
         train(TestModel, TmpModel, gateSize, rate);
     }
-    if (debug) printf("Final cost: %f\n", cost(TestModel, data, forward));
+    printf("Final cost: %f\n", cost(TestModel, data, forward));
 
     printModel("Trained Logic Gate", TestModel, gateSize);
     testModel(TestModel, gateSize, data, forward);
